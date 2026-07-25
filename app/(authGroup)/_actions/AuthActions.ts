@@ -4,19 +4,19 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 type LoginState = {
-  success: true;
+  success: boolean;
   statusCode: number;
   message: string;
-  data: {
+  data?: {
     accessToken: string;
     refreshToken: string;
   };
-};
+} | null;
 
 export const loginAction = async (
   prevState: LoginState,
   formData: FormData,
-) => {
+): Promise<LoginState> => {
   const email = formData.get("email");
   const password = formData.get("password");
 

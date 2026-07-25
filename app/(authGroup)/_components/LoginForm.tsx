@@ -8,7 +8,7 @@ import { useActionState, useEffect } from "react";
 import { toast } from "sonner";
 
 const LoginForm = () => {
-  const [state, action, pending] = useActionState(loginAction, false);
+  const [state, action, pending] = useActionState(loginAction, null);
 
   useEffect(() => {
     if (!state) return;
