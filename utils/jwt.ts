@@ -1,11 +1,15 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
 
-const verifyToken = (token: string, secret: string): JwtPayload | null => {
+type VerifyResult =
+  | { success: true; data: JwtPayload }
+  | { success: false; data: null };
+
+const verifyToken = (token: string, secret: string): VerifyResult => {
   try {
-    return jwt.verify(token, secret) as JwtPayload;
-  } catch (error) {
-    console.log("Token verification failed:", error);
-    return null;
+    const decoded = jwt.verify(token, secret) as JwtPayload;
+    return { success: true, data: decoded };
+  } catch {
+    return { success: false, data: null };
   }
 };
 
